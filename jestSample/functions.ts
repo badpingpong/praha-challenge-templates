@@ -21,7 +21,6 @@ export const asyncSumOfArraySometimesZero = (
       database.save(numbers);
       resolve(sumOfArray(numbers));
     } catch (error) {
-      console.warn('エラー',error)
       resolve(0);
     }
   });
