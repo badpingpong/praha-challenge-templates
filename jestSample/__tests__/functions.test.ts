@@ -13,9 +13,15 @@ describe('functions', () => {
       const result = sumOfArray(numbers)
       expect(result).toBe(15)
     })
-    test('空配列のときはエラー', () => {
+    // 改善前
+    // test('空配列のときはエラー', () => {
+    //   const numbers: number[] = []
+    //   expect(() => sumOfArray(numbers)).toThrowError()
+    // })
+    test('空配列のときは0', () => {
       const numbers: number[] = []
-      expect(() => sumOfArray(numbers)).toThrowError()
+      const result = sumOfArray(numbers)
+      expect(result).toBe(0)
     })
   })
 
@@ -26,9 +32,15 @@ describe('functions', () => {
       expect(result).toBe(15)
     })
 
-    test('空配列のときはエラー', async () => {
+    // 改善前
+    // test('空配列のときはエラー', async () => {
+    //   const numbers: number[] = []
+    //   await expect(async () => asyncSumOfArray(numbers)).rejects.toThrowError()
+    // })
+    test('空配列のときは0', async () => {
       const numbers: number[] = []
-      await expect(async () => asyncSumOfArray(numbers)).rejects.toThrowError()
+      const result = await asyncSumOfArray(numbers)
+      expect(result).toBe(0)
     })
   })
 
@@ -54,10 +66,10 @@ describe('functions', () => {
       const mockSave = jest.fn().mockRejectedValueOnce(new Error('save failed'))
       const numbers = [1, 2, 3, 4, 5]
       // await expect(() => asyncSumOfArraySometimesZero(numbers, { save: mockSave })).rejects.toThrowError()
-        const result = await asyncSumOfArraySometimesZero(numbers, {
-          save: mockSave,
-        })
-        expect(result).toBe(0)
+      const result = await asyncSumOfArraySometimesZero(numbers, {
+        save: mockSave,
+      })
+      expect(result).toBe(0)
     })
   })
 
