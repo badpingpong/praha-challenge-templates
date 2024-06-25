@@ -16,6 +16,9 @@ describe('sumOfArray', () => {
     const result = sumOfArray(numbers)
     expect(result).toBe(0)
   })
+  test.todo("小数に対応")
+  test.todo("0に対応")
+  test.todo("負の数に対応")
 })
 
 describe('asyncSumOfArray', () => {
@@ -30,10 +33,16 @@ describe('asyncSumOfArray', () => {
     const result = await asyncSumOfArray(numbers)
     expect(result).toBe(0)
   })
+  test.todo("小数に対応")
+  test.todo("0に対応")
+  test.todo("負の数に対応")
 })
 describe('asyncSumOfArraySometimesZero', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
   test('should return sum of array', async () => {
-    const mockSave = jest.fn().mockResolvedValueOnce(undefined)
+    const mockSave = jest.fn().mockReturnValueOnce(undefined)
     const numbers = [1, 2, 3, 4, 5]
     const result = await asyncSumOfArraySometimesZero(numbers, {
       save: mockSave,
@@ -42,17 +51,18 @@ describe('asyncSumOfArraySometimesZero', () => {
   })
   test('空配列のときは0を返す', async () => {
     const numbers: number[] = []
-    const mockSave = jest.fn().mockResolvedValueOnce(undefined)
+    const mockSave = jest.fn().mockReturnValueOnce(undefined)
     const result = await asyncSumOfArraySometimesZero(numbers, {
       save: mockSave,
     })
     expect(result).toBe(0)
   })
-  // TODO: エラーになる. なぜ?
-  test.skip('dbのsaveが失敗したときは0を返す', async () => {
-    const mockSave = jest.fn().mockRejectedValueOnce(new Error('save failed'))
+  test('dbのsaveが失敗したときは0を返す', async () => {
+    const mockSave = jest.fn().mockImplementationOnce(() => {
+      throw new Error('fail')
+    })
+
     const numbers = [1, 2, 3, 4, 5]
-    // await expect(() => asyncSumOfArraySometimesZero(numbers, { save: mockSave })).rejects.toThrowError()
     const result = await asyncSumOfArraySometimesZero(numbers, {
       save: mockSave,
     })

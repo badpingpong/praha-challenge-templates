@@ -13,7 +13,7 @@ export const asyncSumOfArray = (numbers: number[]): Promise<number> => {
 }
 
 type DBInterface = {
-  save: (numbers: number[]) => Promise<void>
+  save: (numbers: number[]) => void
 }
 export const asyncSumOfArraySometimesZero = (
   numbers: number[],
@@ -31,7 +31,7 @@ export const asyncSumOfArraySometimesZero = (
 }
 
 type NameApiServiceInterface = {
-  getFirstName: () => string
+  getFirstName: () => Promise<string>
 }
 export const getFirstNameThrowIfLong = async (
   maxNameLength: number,
