@@ -1,18 +1,10 @@
 'use client'
 import styles from './page.module.css'
 import { useState } from "react";
+import { Square } from './TicTacToe/Square';
 
 export default function Home() {
   return (<Game />  );
-}
-
-type SquareProps = {value: string, onSquareClick: () => void};
-function Square({ value, onSquareClick }: SquareProps) {
-  return (
-    <button className={styles.square} onClick={onSquareClick}>
-      {value}
-    </button>
-  );
 }
 
 type BoardProps = {xIsNext: boolean, squares: string[], onPlay: (squares: string[]) => void};
